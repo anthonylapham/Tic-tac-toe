@@ -10,28 +10,28 @@
 
 <body>
   <div id="div1">
-    <button type="btn btn-primary" id="vsPC">Player vs. Computer</button>
-    <button type="btn btn-primary" id="pvp">Player vs. Player</button>
+    <button type="btn btn-primary" data-mode="computer" class="mode-btn" id="vsPC">Player vs. Computer</button>
+    <button type="btn btn-primary" data-mode="human" class="mode-btn" id="pvp">Player vs. Player</button>
   </div>
   <div id="div2">
-    <button type="btn btn-primary" id="x-btn">X</button>
-    <button type="btn btn-primary" id="o-btn">O</button>
+    <button type="btn btn-primary" data-choice="x" class="choice-btn" id="x-btn">X</button>
+    <button type="btn btn-primary" data-choice="o" class="choice-btn" id="o-btn">O</button>
   </div>
-  <table>
+  <table id="game-table">
     <tr>
-      <td id="squar1"></td>
-      <td id="square2"></td>
-      <td id="square3"></td>
+      <td id="s1"></td>
+      <td id="s2"></td>
+      <td id="s3"></td>
     </tr>
     <tr>
-      <td id="square4"></td>
-      <td id="square5"></td>
-      <td id="square6"></td>
+      <td id="s4"></td>
+      <td id="s5"></td>
+      <td id="s6"></td>
     </tr>
     <tr>
-      <td id="square7"></td>
-      <td id="square8"></td>
-      <td id="square9"></td>
+      <td id="s7"></td>
+      <td id="s8"></td>
+      <td id="s9"></td>
     </tr>
   </table>
 
