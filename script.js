@@ -28,6 +28,12 @@ $(document).ready(function() {
     game.mode = e.target.getAttribute('data-mode');
     $('.mode-btn').hide();
     $('.choice-btn').show();
+    if($('button').attr('id') == 'vsPC'){
+      window.alert("Good Luck Human");
+    }
+    else{
+      window.alert("May the best person win!")
+    }
   });
 
   // After game mode is selected, prompt human player OR player 1 to select X or O
@@ -37,7 +43,7 @@ $(document).ready(function() {
     game.turn = game.player1
     $('.choice-btn').hide();
     $('#game-table').show();
-    console.log(game)
+    window.alert("Let The Game Begin!")
   })
 
   // After game choice has been selected, display table and prompt player 1 or human player
