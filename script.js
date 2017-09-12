@@ -46,6 +46,18 @@ $(document).ready(function() {
     window.alert("Let The Game Begin!")
   })
 
+  function draw(){
+    if(document.getElementById('game-table').disabled == true){
+      window.alert("Tie Game!")
+    }
+  }
+
+  function pvp(){
+    if($('button').attr('data-mode') == 'human'){
+
+    }
+  }
+
   // After game choice has been selected, display table and prompt player 1 or human player
   // to start the game.
 
