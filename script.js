@@ -28,10 +28,9 @@ $(document).ready(function() {
     game.mode = e.target.getAttribute('data-mode');
     $('.mode-btn').hide();
     $('.choice-btn').show();
-    if($('button').attr('id') == 'vsPC'){
+    if ($('button').attr('id') == 'vsPC') {
       window.alert("Good Luck Human");
-    }
-    else{
+    } else {
       window.alert("May the best person win!")
     }
   });
@@ -46,17 +45,30 @@ $(document).ready(function() {
     window.alert("Let The Game Begin!")
   })
 
-  function draw(){
-    if(document.getElementById('game-table').disabled == true){
+  function draw() {
+    if (document.getElementById('game-table').disabled == true) {
       window.alert("Tie Game!")
     }
   }
 
-  function pvp(){
-    if($('button').attr('data-mode') == 'human'){
-
+  $('#game-table').on('click', function() {
+    if(game.player1 === 'x'){
+      if($('#s1').hasClass('x-btn') && $('#s2').hasClass('x-btn') && $('#s3').hasClass('x-btn')){
+        window.alert("Player 1 Wins!")
+      }
+      else{
+        window.alert("Player 2 Wins!")
+      }
     }
-  }
+    if(game.player === 'o'){
+      if($('#s1').hasClass('o-btn') && $('#s2').hasClass('o-btn') && $('#s3').hasClass('o-btn')){
+        window.alert("Player 1 Wins!")
+      }
+      else{
+        window.alert("Player 2 Wins!")
+      }
+    }
+  })
 
   // After game choice has been selected, display table and prompt player 1 or human player
   // to start the game.
@@ -68,9 +80,9 @@ $(document).ready(function() {
 
   // After marking, check for a winning combination of game.turn. There are 8 winning combinations
   // if there is a winner, stop game and display a message
-    // if there is no winner, check if the board is full
-      // if board is full, stop game and display that it is a tie
-      // if board is not full, change game.turn to other player
+  // if there is no winner, check if the board is full
+  // if board is full, stop game and display that it is a tie
+  // if board is not full, change game.turn to other player
 
 
 });
