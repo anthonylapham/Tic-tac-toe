@@ -18,6 +18,20 @@ $(document).ready(function() {
     this.turn = null;
   }
 
+  var winningCombinations = [
+    // finish vertlical and diagonal combinations
+    // first you will need an out loop, if there is a winning combo then break out of outer loop
+    // in the inner loop, use Array#every to check if all elements (the squares) have current player marking
+    [1,2,3],
+    [4,5,6],
+    [7.8,9],
+    [1,4,7],
+    [2,5,8],
+    [3,6,9],
+    [1,5,9],
+    [3,5,7]
+  ]
+
   let game = new DEFAULT_GAME();
 
   // At game init, display only 1 or 2 Player Buttons
@@ -28,7 +42,8 @@ $(document).ready(function() {
     game.mode = e.target.getAttribute('data-mode');
     $('.mode-btn').hide();
     $('.choice-btn').show();
-    if ($('button').attr('id') == 'vsPC') {
+    console.log('this is what jquery gives us:', $('button'))
+    if (game.mode === "computer") {
       window.alert("Good Luck Human");
     } else {
       window.alert("May the best person win!")
@@ -51,23 +66,15 @@ $(document).ready(function() {
     }
   }
 
-  $('#game-table').on('click', function() {
-    if(game.player1 === 'x'){
-      if($('#s1').hasClass('x-btn') && $('#s2').hasClass('x-btn') && $('#s3').hasClass('x-btn')){
-        window.alert("Player 1 Wins!")
-      }
-      else{
-        window.alert("Player 2 Wins!")
-      }
-    }
-    if(game.player === 'o'){
-      if($('#s1').hasClass('o-btn') && $('#s2').hasClass('o-btn') && $('#s3').hasClass('o-btn')){
-        window.alert("Player 1 Wins!")
-      }
-      else{
-        window.alert("Player 2 Wins!")
-      }
-    }
+  $('td').on('click', function() {
+    // 1) update game.state to keep track of moves
+    game.state[this.getAttribute('id')] = game.turn
+
+    // 2) mark the board and make disabled
+
+    // 3) check if there is a winner (move to a another function)
+      // If not winner, then update game.turn (and if computer, make computer select a valid choice, check for winner, etc)
+      // if winner, alert and reset game object
   })
 
   // After game choice has been selected, display table and prompt player 1 or human player
