@@ -17,6 +17,8 @@ table {
 
 td {
   border: 5px black solid;
+  height: 75px;
+  width: 75px;
 }
 
 body {

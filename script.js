@@ -22,14 +22,14 @@ $(document).ready(function() {
     // finish vertlical and diagonal combinations
     // first you will need an out loop, if there is a winning combo then break out of outer loop
     // in the inner loop, use Array#every to check if all elements (the squares) have current player marking
-    [1,2,3],
-    [4,5,6],
-    [7.8,9],
-    [1,4,7],
-    [2,5,8],
-    [3,6,9],
-    [1,5,9],
-    [3,5,7]
+    ['s1', 's2', 's3'],
+    ['s4', 's5', 's6'],
+    ['s7', 's8', 's9'],
+    ['s1', 's4', 's7'],
+    ['s2', 's5', 's8'],
+    ['s3', 's6', 's9'],
+    ['s1', 's5', 's9'],
+    ['s3', 's5', 's7']
   ]
 
   let game = new DEFAULT_GAME();
@@ -42,11 +42,10 @@ $(document).ready(function() {
     game.mode = e.target.getAttribute('data-mode');
     $('.mode-btn').hide();
     $('.choice-btn').show();
-    console.log('this is what jquery gives us:', $('button'))
     if (game.mode === "computer") {
-      window.alert("Good Luck Human");
+      // window.alert("Good Luck Human");
     } else {
-      window.alert("May the best person win!")
+      // window.alert("May the best person win!")
     }
   });
 
@@ -57,39 +56,67 @@ $(document).ready(function() {
     game.turn = game.player1
     $('.choice-btn').hide();
     $('#game-table').show();
-    window.alert("Let The Game Begin!")
+    // window.alert("Let The Game Begin!")
   })
 
-  function draw() {
-    if (document.getElementById('game-table').disabled == true) {
-      window.alert("Tie Game!")
+  function keepGoing() {
+    return _.some(game.state, function(value, square) {
+      return value === null
+    })
+  }
+
+  function win() {
+    if (winningCombinations[0][0] === true) {
+      // window.alert("Top Row Victory!");
+      location.reload();
+    } else if (winningCombinations[0][1] === true) {
+      // window.alert("Mid Row Victory!");
+      location.reload();
+
+    } else if (winningCombinations[0][2] === true) {
+      // window.alert("Bottom Row Victory!");
+      location.reload();
+    } else if (winningCombinations[0][3] === true) {
+      // window.alert("");
+      location.reload();
+    } else if (winningCombinations[0][4] === true) {
+      // window.alert("");
+      location.reload();
+    } else if (winningCombinations[0][5] === true) {
+      // window.alert("");
+      location.reload();
+    } else if (winningCombinations[0][6] === true) {
+      // window.alert("");
+      location.reload();
+    } else if (winningCombinations[0][7] === true) {
+      // window.alert("");
+      location.reload();
     }
   }
 
   $('td').on('click', function() {
+    // 0 check if marked
+    if ($(this).text() !== '') {
+      return
+    }
+
     // 1) update game.state to keep track of moves
     game.state[this.getAttribute('id')] = game.turn
 
-    // 2) mark the board and make disabled
+    // 2) mark the board
+    $(this).text(game.turn)
 
     // 3) check if there is a winner (move to a another function)
-      // If not winner, then update game.turn (and if computer, make computer select a valid choice, check for winner, etc)
-      // if winner, alert and reset game object
+    // If not winner, then check for draw
+    if (keepGoing() === false) {
+      //window.alert('Draw')
+      location.reload();
+    }
+    // if not a draw, then update game.turn (and if computer, make computer select a valid choice, check for winner, etc)
+    game.turn = game.turn === 'x' ? 'o' : 'x'
+    // if winner, alert and reset game object
   })
 
-  // After game choice has been selected, display table and prompt player 1 or human player
-  // to start the game.
-
-  // Either disable square after it has been selected OR check if it is avaialabe
-  // If player selected invalid square, tell them to pick another square
-
-  // if it is valid, add the mark X or O to the <td></td> element and update game.state object
-
-  // After marking, check for a winning combination of game.turn. There are 8 winning combinations
-  // if there is a winner, stop game and display a message
-  // if there is no winner, check if the board is full
-  // if board is full, stop game and display that it is a tie
-  // if board is not full, change game.turn to other player
 
 
 });
