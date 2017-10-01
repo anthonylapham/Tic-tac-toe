@@ -65,7 +65,7 @@ $(document).ready(function() {
     })
   }
 
-  function win() {
+  /*function win() {
     if (winningCombinations[0][0] === true) {
       // window.alert("Top Row Victory!");
       location.reload();
@@ -92,7 +92,7 @@ $(document).ready(function() {
       // window.alert("");
       location.reload();
     }
-  }
+  }*/
 
   $('td').on('click', function() {
     // 0 check if marked
@@ -108,6 +108,27 @@ $(document).ready(function() {
 
     // 3) check if there is a winner (move to a another function)
     // If not winner, then check for draw
+    /*switch (game.state) {
+      case winningCombinations[0][0]:
+        break;
+      case :winningCombinations[0][1]:
+        break;
+      case winningCombinations[0][2]:
+        break;
+      case winningCombinations[0][3]:
+        break;
+      case winningCombinations[0][4]:
+        break;
+      case winningCombinations[0][5]:
+        break;
+      case winningCombinations[0][6]:
+        break;
+      case winningCombinations[0][7]:
+        break;
+
+    }*/
+
+
     if (keepGoing() === false) {
       //window.alert('Draw')
       location.reload();
