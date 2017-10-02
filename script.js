@@ -44,9 +44,9 @@ $(document).ready(function() {
     $('.mode-btn').hide();
     $('.choice-btn').show();
     if (game.mode === "computer") {
-      // window.alert("Good Luck Human");
+      window.alert("Good Luck Human");
     } else {
-      // window.alert("May the best person win!")
+      window.alert("May the best person win!")
     }
   });
 
@@ -57,7 +57,7 @@ $(document).ready(function() {
     game.turn = game.player1
     $('.choice-btn').hide();
     $('#game-table').show();
-    // window.alert("Let The Game Begin!")
+    window.alert("Let The Game Begin!")
   })
 
   function keepGoing() {
