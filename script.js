@@ -38,6 +38,7 @@ $(document).ready(function() {
   $(".choice-btn").hide();
   $("#game-table").hide();
 
+  // Select game mode
   $('.mode-btn').on("click", function(e) {
     game.mode = e.target.getAttribute('data-mode');
     $('.mode-btn').hide();
@@ -65,35 +66,44 @@ $(document).ready(function() {
     })
   }
 
-  /*function win() {
-    if (winningCombinations[0][0] === true) {
-      // window.alert("Top Row Victory!");
-      location.reload();
-    } else if (winningCombinations[0][1] === true) {
-      // window.alert("Mid Row Victory!");
-      location.reload();
+  function checkWinner() {
+    for (var outer = 0; outer < winningCombinations.length; outer++) {
+      const winnerExists = winningCombinations[outer].every(function(piece) {
+        return game.state[piece] === game.turn
+      })
+      if (winnerExists) {
+        return true
+      }
+    }
+    return false
+  }
 
-    } else if (winningCombinations[0][2] === true) {
-      // window.alert("Bottom Row Victory!");
+  function computerMoves() {
+    var openSpots = _.reduce(game.state, function(acc, value, key) {
+      if (value === null) {
+        acc.push(key)
+      }
+      return acc
+    }, [])
+    var computerChoice = _.sample(openSpots)
+    game.state[computerChoice] = game.turn
+    $('#' + computerChoice).text(game.turn).css('font-size', '50px').css('text-align', 'center').css('color', '#B22222');
+    if (checkWinner()) {
+      alert(game.turn + ' is the winner')
       location.reload();
-    } else if (winningCombinations[0][3] === true) {
-      // window.alert("");
-      location.reload();
-    } else if (winningCombinations[0][4] === true) {
-      // window.alert("");
-      location.reload();
-    } else if (winningCombinations[0][5] === true) {
-      // window.alert("");
-      location.reload();
-    } else if (winningCombinations[0][6] === true) {
-      // window.alert("");
-      location.reload();
-    } else if (winningCombinations[0][7] === true) {
-      // window.alert("");
+      return
+    }
+
+    if (keepGoing() === false) {
+      window.alert('Draw')
       location.reload();
     }
-  }*/
 
+
+    game.turn = game.turn === 'x' ? 'o' : 'x'
+  }
+
+  // When a user clicks the board
   $('td').on('click', function() {
     // 0 check if marked
     if ($(this).text() !== '') {
@@ -104,40 +114,31 @@ $(document).ready(function() {
     game.state[this.getAttribute('id')] = game.turn
 
     // 2) mark the board
-    $(this).text(game.turn)
+    $(this).text(game.turn).css('font-size', '50px').css('text-align', 'center');
+    if (game.turn === game.player1) {
+      $(this).text(game.turn).css('color', '#1E90FF');
+    } else {
+      $(this).text(game.turn).css('color', '#8B008B');
+    }
 
     // 3) check if there is a winner (move to a another function)
-    // If not winner, then check for draw
-    /*switch (game.state) {
-      case winningCombinations[0][0]:
-        break;
-      case :winningCombinations[0][1]:
-        break;
-      case winningCombinations[0][2]:
-        break;
-      case winningCombinations[0][3]:
-        break;
-      case winningCombinations[0][4]:
-        break;
-      case winningCombinations[0][5]:
-        break;
-      case winningCombinations[0][6]:
-        break;
-      case winningCombinations[0][7]:
-        break;
+    if (checkWinner()) {
+      window.alert(game.turn + ' is the winner')
+      location.reload();
+      return
+    }
 
-    }*/
-
-
+    // If no winner, check for a draw
     if (keepGoing() === false) {
-      //window.alert('Draw')
+      window.alert('Draw')
       location.reload();
     }
+
     // if not a draw, then update game.turn (and if computer, make computer select a valid choice, check for winner, etc)
     game.turn = game.turn === 'x' ? 'o' : 'x'
-    // if winner, alert and reset game object
+    if (game.mode === 'computer') {
+      computerMoves()
+    }
   })
-
-
 
 });
